@@ -7,6 +7,6 @@
                   kernel,
                   stdlib
                  ]},
-  {mod, { cassandra_client_app, []}},
+  {mod, []},
   {env, []}
  ]}.
