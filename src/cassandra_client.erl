@@ -221,7 +221,7 @@ make_mutation_map(Input) when is_list(Input) ->
   Mutations = [ {iolist_to_binary(Row), translate_column_family(CF), make_mutations(Mutation)} || {Row, CF, Mutation} <- Input ],
 
   RowDict = lists:foldl(fun({Row, CF, M}, Dict) -> dict:append(Row, {CF, M}, Dict) end, dict:new(), Mutations),
-  
+
   Result = dict:map(fun(_, Value) ->
     lists:foldl(fun({CF, M}, Dict) ->
       dict:append_list(CF, M, Dict)
@@ -352,7 +352,7 @@ simple_client_test() ->
       {"test", data, {insert, [{"test", "world"}]}}
     ], one),
 
-  {ok, {Name, Value, _Timestamp}} = C:get_column("test", data, "test", one), 
+  {ok, {Name, Value, _Timestamp}} = C:get_column("test", data, "test", one),
 
   % cassandra returns actual binaries
   ?assertEqual({<<"test">>, <<"world">>}, {Name, Value}),
